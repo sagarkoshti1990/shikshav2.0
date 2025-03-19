@@ -108,6 +108,7 @@ export const MIME_TYPE = {
     'application/vnd.ekstep.h5p-archive',
     'application/vnd.ekstep.html-archive',
   ],
+  ECML_MIME_TYPE: ['application/vnd.ekstep.ecml-archive'],
 };
 
 let userName = 'arif';
@@ -179,8 +180,6 @@ export const V1PlayerConfig: PlayerConfig = {
       },
     ],
     showStartPage: true,
-    host: process.env.NEXT_PUBLIC_TELEMETRY_URL,
-    endpoint: '/v1/telemetry',
     overlay: {
       enableUserSwitcher: true,
       showOverlay: true,
@@ -246,4 +245,71 @@ export const V1PlayerConfig: PlayerConfig = {
     },
   },
   data: {},
+};
+
+export const ECMLPlayerConfig: any = {
+  config: {
+    showEndPage: false,
+    endPage: [
+      {
+        template: 'assessment',
+        contentType: ['SelfAssess'],
+      },
+    ],
+    showStartPage: true,
+    host: '',
+    overlay: {
+      showUser: false,
+    },
+    splash: {
+      text: '',
+      icon: '',
+      bgImage: 'assets/icons/splacebackground_1.png',
+      webLink: '',
+    },
+    repos: ['/sunbird-plugins/renderer'],
+    plugins: [
+      {
+        id: 'org.sunbird.iframeEvent',
+        ver: '1.0',
+        type: 'plugin',
+      },
+      {
+        id: 'org.sunbird.player.endpage',
+        ver: '1.1',
+        type: 'plugin',
+      },
+    ],
+    sideMenu: {
+      showShare: true,
+      showDownload: true,
+      showExit: false,
+    },
+  },
+  context: {
+    mode: 'play',
+    partner: [],
+    pdata: {
+      id: 'production.production.portal',
+      ver: '5.1.0',
+      pid: 'sunbird-portal.contentplayer',
+    },
+    contentId: '', // contentId set here using read api
+    sid: '',
+    uid: '',
+    timeDiff: -1.129,
+    contextRollup: {},
+    channel: process.env.NEXT_PUBLIC_CHANNEL_ID || '',
+    did: '',
+    dims: [],
+    tags: [process.env.NEXT_PUBLIC_CHANNEL_ID || ''],
+    app: [process.env.NEXT_PUBLIC_CHANNEL_ID || ''],
+    cdata: [],
+    userData: {
+      firstName: userName,
+      lastName: '',
+    },
+  },
+  // metadata: {}, // metadata set here using read api
+  data: {}, // data set here using read api,
 };

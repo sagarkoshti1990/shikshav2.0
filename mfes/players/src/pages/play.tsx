@@ -7,7 +7,7 @@ import {
   getQumlData,
 } from '../services/PlayerService';
 import { Box, Typography } from '@mui/material';
-import { MIME_TYPE } from '../utils/url.config';
+import { ECMLPlayerConfig, MIME_TYPE } from '../utils/url.config';
 import {
   PlayerConfig,
   V1PlayerConfig,
@@ -53,6 +53,12 @@ const Players: React.FC<SunbirdPlayerProps> = ({
           config.metadata = metadata;
         } else if (MIME_TYPE.INTERACTIVE_MIME_TYPE.includes(data?.mimeType)) {
           config = { ...V1PlayerConfig, metadata: data };
+        } else if (MIME_TYPE.ECML_MIME_TYPE.includes(data?.mimeType)) {
+          config = {
+            ...ECMLPlayerConfig,
+            metadata: data,
+            data: data?.body || '',
+          };
           //@ts-ignore
           config.context['contentId'] = identifier;
         } else {

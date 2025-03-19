@@ -15,5 +15,16 @@ export function middleware(request: { nextUrl: { clone: () => any } }) {
     return NextResponse.rewrite(url);
   }
 
+  if (
+    url.pathname.startsWith('/sunbird-plugins') ||
+    url.pathname.startsWith('/content-plugins') ||
+    url.pathname.startsWith('/assets')
+  ) {
+    url.protocol = 'https';
+    url.hostname = 'sunbirdsaas.com';
+    url.port = '';
+    return NextResponse.redirect(url);
+  }
+
   return NextResponse.next();
 }
